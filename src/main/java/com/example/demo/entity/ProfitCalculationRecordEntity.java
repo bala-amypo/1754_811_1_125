@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
-public class ProfileCalculationRecordEntity {
+public class ProfitCalculationRecordEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
