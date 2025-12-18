@@ -1,11 +1,14 @@
 package com.example.demo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.IngredientEntity;
 import com.example.demo.repository.IngredientRepository;
 import com.example.demo.service.IngredientService;
 
+
+@Service
 public class IngredientServiceImpl implements IngredientService {
     @Autowired
     IngredientRepository repo;
