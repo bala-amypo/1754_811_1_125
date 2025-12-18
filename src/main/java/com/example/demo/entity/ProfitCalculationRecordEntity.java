@@ -16,9 +16,9 @@ public class ProfitCalculationRecordEntity {
     private float totalCost;
     private float totalMargin;
     private LocalDateTime calculatedAt;
-    public ProfileCalculationRecordEntity() {
+    public ProfitCalculationRecordEntity() {
     }
-    public ProfileCalculationRecordEntity(Long id, MenuItemEntity menuItem, float totalCost, float totalMargin,
+    public ProfitCalculationRecordEntity(Long id, MenuItemEntity menuItem, float totalCost, float totalMargin,
             LocalDateTime calculatedAt) {
         this.id = id;
         this.menuItem = menuItem;
