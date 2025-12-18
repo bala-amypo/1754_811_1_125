@@ -18,12 +18,26 @@ public class CategoryEntity{
     public void setName(String name){
         this.name=name;
     }
+    public String getName(String name){
+        return this.name;
+    }
+
+
     public void setUnit(String unit){
         this.unit=unit;
     }
-    public void setName(String name){
+    public String getUnit(String unit){
+        return  this.unit;
+    }
+
+    public void setCostPerUnit(String costPerUnit){
         this.costPerUnit=costPerUnit;
     }
+    public String GetCostPerUnit(String costPerUnit){
+         return this.costPerUnit;
+     }
+
+
     public void setActive(boolean active){
         this.active=active;
     }
@@ -32,7 +46,7 @@ public class CategoryEntity{
     }
     
     public void setUpdatedAt( LocalDateTime updatedAt){
-        this.updatedAt=createdAt;
+        this.updatedAt=updatedAt;
     }
     
 
