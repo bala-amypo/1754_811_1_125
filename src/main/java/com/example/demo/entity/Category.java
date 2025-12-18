@@ -2,9 +2,9 @@
 
 package com.example.demo.entity;
 import java.util.*;
+import 
 
-
-
+@Entity
 public class CategoryEntity{
     private Long id;
     private String name;
@@ -14,6 +14,6 @@ public class CategoryEntity{
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    
+
 
 }
