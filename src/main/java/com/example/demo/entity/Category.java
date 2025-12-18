@@ -1,6 +1,6 @@
 
 
-package com.
+package com.example.demo.entity;
 
 
 public class CategoryEntity{
@@ -9,5 +9,6 @@ public class CategoryEntity{
     private String unit;
     private  String costPerUnit;
     private boolean active;
-    private 
+    private LocatDateTime createdAt;
+    private LocatDateTime updatedAt;
 }
