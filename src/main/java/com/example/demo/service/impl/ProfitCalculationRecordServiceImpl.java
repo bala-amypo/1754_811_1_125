@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.ProfitCalculationRecordEntity;
 import com.example.demo.repository.ProfitCalculationRecordRepository;
+import com.example.demo.service.ProfitCalculationRecordService;
 
 @Service
-public class ProfitCalculationRecordServiceImpl {
+public class ProfitCalculationRecordServiceImpl implements ProfitCalculationRecordService {
     @Autowired
     ProfitCalculationRecordRepository repo;
 
