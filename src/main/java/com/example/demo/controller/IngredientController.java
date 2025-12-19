@@ -33,7 +33,7 @@ public class IngredientController {
         return ser.getIngredientById(id);
     }
     @GetMapping("/getAllIngredient")
-    public List<IngredientEntity> getAllIngredient(@PathVariable Long id){
+    public List<IngredientEntity> getAllIngredient(){
         return ser.getAllIngredient();
     }
     @PutMapping("/deActivateIngredient")
