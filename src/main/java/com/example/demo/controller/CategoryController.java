@@ -39,7 +39,7 @@ public class CategoryController {
     public List<CategoryEntity> getAllCategories(){
         return ser.getAllCategories();
     }
-    @GetMapping("/deActiveCategory/{id}")
+    @PutMapping("/deActiveCategory/{id}")
     public CategoryEntity deActiveCategory(@PathVariable Long id){
         return  ser.deActiveCategory(id);
 
