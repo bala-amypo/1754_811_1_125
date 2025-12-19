@@ -30,7 +30,7 @@ public class MenuItemServiceImpl implements MenuItemService {
         return repo.save(exist);
 
     }
-    public MenuItemEntity getIngredientById(Long id){
+    public MenuItemEntity getMenuItemById(Long id){
         return repo.findById(id).orElseThrow(()->new ResourceNotFoundException("id not found"));
 
     }

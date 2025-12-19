@@ -25,9 +25,9 @@ public class MenuItemController {
    public MenuItemEntity updateMenuItem(@PathVariable Long id,@RequestBody MenuItemEntity ingredient){
     return ser.updateMenuItem(id,ingredient);
    }
-   @GetMapping("/getIngredientById/{id}")
-   public MenuItemEntity getIngredientById(@PathVariable Long id){
-     return ser.getIngredientById(id);
+   @GetMapping("/getMenuById/{id}")
+   public MenuItemEntity getMenuItemById(@PathVariable Long id){
+     return ser.getMenuItemById(id);
    }
    @GetMapping("/getAllIngredient")
    public List<MenuItemEntity> getAllIngredient(){
