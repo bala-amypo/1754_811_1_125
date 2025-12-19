@@ -30,8 +30,8 @@ public class MenuItemController {
      return ser.getMenuItemById(id);
    }
    @GetMapping("/getAllIngredient")
-   public List<MenuItemEntity> getAllIngredient(){
-     return ser.getAllIngredient();
+   public List<MenuItemEntity> getAllMenuItem(){
+     return ser.getAllMenuItem();
    }
    @PutMapping("/deActivateIngredient/{id}")
    public MenuItemEntity deActivateIngredient(@PathVariable Long id){

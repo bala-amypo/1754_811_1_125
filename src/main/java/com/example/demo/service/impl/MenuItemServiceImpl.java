@@ -34,7 +34,7 @@ public class MenuItemServiceImpl implements MenuItemService {
         return repo.findById(id).orElseThrow(()->new ResourceNotFoundException("id not found"));
 
     }
-     public List<MenuItemEntity> getAllIngredient(){
+     public List<MenuItemEntity> getAllMenuItem(){
 
         return repo.findAll();
      }
