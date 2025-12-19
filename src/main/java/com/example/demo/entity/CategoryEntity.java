@@ -4,16 +4,16 @@ import jakarta.persistence.*;
 
 @Entity
 
-public class Category {
+public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
     private boolean active;
-    public Category() {
+    public CategoryEntity() {
     }
-    public Category(Long id, String name, String description, boolean active) {
+    public CategoryEntity(Long id, String name, String description, boolean active) {
         this.id = id;
         this.name = name;
         this.description = description;
