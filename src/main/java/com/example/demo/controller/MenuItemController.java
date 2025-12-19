@@ -29,7 +29,7 @@ public class MenuItemController {
    public MenuItemEntity getMenuItemById(@PathVariable Long id){
      return ser.getMenuItemById(id);
    }
-   @GetMapping("/getAllIngredient")
+   @GetMapping("/getAllMenuItem")
    public List<MenuItemEntity> getAllMenuItem(){
      return ser.getAllMenuItem();
    }
