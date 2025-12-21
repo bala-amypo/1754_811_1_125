@@ -1,23 +1,47 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import { configureStore } from "@reduxjs/toolkit";
-import themeReducer from "./store/themeSlice";
-import App from "./App";
+package com.example.demo.entity;
 
-const store = configureStore({
-  reducer: {
-    theme: themeReducer,
-  },
-});
+import jakarta.persistence.*;
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+@Entity
 
-root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
-);
+public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String description;
+    private boolean active=true;
+    public Category() {
+    }
+    public Category( String name, String description, boolean active) {
+        
+        this.name = name;
+        this.description = description;
+        this.active = active;
+    }
+    public Long getId() {
+        return id;
+    }
+   
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public boolean isActive() {
+        return active;
+    }
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    
+
+}

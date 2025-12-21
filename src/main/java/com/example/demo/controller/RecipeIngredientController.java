@@ -1,21 +1,58 @@
-package com.example.demo.controller;
+package com.example.demo.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.persistence.*;
 
-import com.example.demo.entity.RecipeIngredientEntity;
-import com.example.demo.service.RecipeIngredientService;
+@Entity
+public class RecipeIngredient {
 
-@RestController
-public class RecipeIngredientController {
 
-    @Autowired
-    RecipeIngredientService ser;
-    @PostMapping("/addrecipe")
-    public RecipeIngredientEntity addrecipe (@RequestBody RecipeIngredientEntity std){
-        return ser.addrecipe(std);
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    private MenuItem menuitem;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    private Ingredient ingredient;
+    private Double quantityRequired;
+    public RecipeIngredient(Long id, MenuItem menuitem, Ingredient ingredient,
+            Double quantityRequired) {
+        this.id = id;
+        this.menuitem = menuitem;
+        this.ingredient = ingredient;
+        this.quantityRequired = quantityRequired;
     }
+    public RecipeIngredient() {
+    }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public MenuItem getMenuitem() {
+        return menuitem;
+    }
+    public void setMenuitem(MenuItem menuitem) {
+        this.menuitem = menuitem;
+    }
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
+    }
+    public Double getQuantityRequired() {
+        return quantityRequired;
+    }
+    public void setQuantityRequired(Double quantityRequired) {
+        this.quantityRequired = quantityRequired;
+    }
+
+
+    
+
+
+
     
 }

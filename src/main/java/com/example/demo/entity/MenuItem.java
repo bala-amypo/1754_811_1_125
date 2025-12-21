@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
@@ -7,33 +8,39 @@ import jakarta.persistence.*;
 
 @Entity
 
-public class MenuItemEntity {
+public class MenuItem {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
-    private float sellingPrice;
-    private boolean active;
+    private BigDecimal sellingPrice;
+    private boolean active=true;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    public MenuItemEntity() {
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt=LocalDateTime.now();
     }
-    public MenuItemEntity(Long id, String name, String description, float sellingPrice, boolean active,
-            LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt=LocalDateTime.now();
+        
+    }
+    public MenuItem() {
+    }
+    public MenuItem( String name, String description, BigDecimal sellingPrice, boolean active) {
+       
         this.name = name;
         this.description = description;
         this.sellingPrice = sellingPrice;
         this.active = active;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+       
     }
     public Long getId() {
         return id;
     }
-    public void setId(Long id) {
-        this.id = id;
-    }
+   
     public String getName() {
         return name;
     }
@@ -46,10 +53,10 @@ public class MenuItemEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    public float getSellingPrice() {
+    public BigDecimal getSellingPrice() {
         return sellingPrice;
     }
-    public void setSellingPrice(float sellingPrice) {
+    public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
     public boolean isActive() {
@@ -61,14 +68,10 @@ public class MenuItemEntity {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+   
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+   
 
 }

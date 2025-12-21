@@ -1,45 +1,117 @@
-package com.example.demo.controller;
+package com.example.demo.entity;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.persistence.*;
 
-import com.example.demo.entity.IngredientEntity;
-import com.example.demo.service.IngredientService;
-
-
-@RestController
-public class IngredientController {
-    @Autowired
-    IngredientService ser;
-    @PostMapping("/createIngredient")
-    public IngredientEntity createIngredient (@RequestBody IngredientEntity std){
-        return ser.createIngredient(std);
-    }
-
-    @PutMapping("/updateIngredient/{id}")
-    public IngredientEntity updateIngredient(@PathVariable Long  id,@RequestBody IngredientEntity std){
-        return ser.updateIngredient(id,std);
-
-    }
-    @GetMapping("/getIngredientById/{id}")
-    public IngredientEntity getIngredientById(@PathVariable Long id){
-        return ser.getIngredientById(id);
-    }
-    @GetMapping("/getAllIngredient")
-    public List<IngredientEntity> getAllIngredient(){
-        return ser.getAllIngredient();
-    }
-    @PutMapping("/deActivateIngredient")
-    public IngredientEntity deActivateEntity(@PathVariable Long id){
-        return ser.deActivateEntity(id);
-    }
+@Entity
+public class Ingredient {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     
+    private String name;
+
+    private String unit;
+
+    private BigDecimal costPerUnit;
+
+    private boolean active=true;
+
+   
+    private LocalDateTime createdAt;
+
+    
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt=LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt=LocalDateTime.now();
+    }
+
+
+    public Ingredient() {
+    }
+
+
+    public Ingredient( String name, String unit, BigDecimal costPerUnit, boolean active) {
+        
+        this.name = name;
+        this.unit = unit;
+        this.costPerUnit = costPerUnit;
+        this.active = active;
+        
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+
+    
+
+
+    public String getName() {
+        return name;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public String getUnit() {
+        return unit;
+    }
+
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+
+    public BigDecimal getCostPerUnit() {
+        return costPerUnit;
+    }
+
+
+    public void setCostPerUnit(BigDecimal costPerUnit) {
+        this.costPerUnit = costPerUnit;
+    }
+
+
+    public boolean isActive() {
+        return active;
+    }
+
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+
+   
+
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+
+   
+
 }

@@ -1,11 +1,12 @@
 package com.example.demo.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
 @Entity
-public class IngredientEntity {
+public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,9 +16,9 @@ public class IngredientEntity {
 
     private String unit;
 
-    private String costPerUnit;
+    private BigDecimal costPerUnit;
 
-    private boolean active;
+    private boolean active=true;
 
    
     private LocalDateTime createdAt;
@@ -25,20 +26,28 @@ public class IngredientEntity {
     
     private LocalDateTime updatedAt;
 
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt=LocalDateTime.now();
+    }
 
-    public IngredientEntity() {
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt=LocalDateTime.now();
     }
 
 
-    public IngredientEntity(Long id, String name, String unit, String costPerUnit, boolean active,
-            LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
+    public Ingredient() {
+    }
+
+
+    public Ingredient( String name, String unit, BigDecimal costPerUnit, boolean active) {
+        
         this.name = name;
         this.unit = unit;
         this.costPerUnit = costPerUnit;
         this.active = active;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        
     }
 
 
@@ -47,9 +56,7 @@ public class IngredientEntity {
     }
 
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    
 
 
     public String getName() {
@@ -72,12 +79,12 @@ public class IngredientEntity {
     }
 
 
-    public String getCostPerUnit() {
+    public BigDecimal getCostPerUnit() {
         return costPerUnit;
     }
 
 
-    public void setCostPerUnit(String costPerUnit) {
+    public void setCostPerUnit(BigDecimal costPerUnit) {
         this.costPerUnit = costPerUnit;
     }
 
@@ -97,9 +104,7 @@ public class IngredientEntity {
     }
 
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+   
 
 
     public LocalDateTime getUpdatedAt() {
@@ -107,8 +112,6 @@ public class IngredientEntity {
     }
 
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+   
 
 }

@@ -3,24 +3,26 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
-public class RecipeIngredientEntity {
+public class RecipeIngredient {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    private MenuItemEntity menuitem;
+    private MenuItem menuitem;
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    private IngredientEntity ingredient;
+    private Ingredient ingredient;
     private Double quantityRequired;
-    public RecipeIngredientEntity(Long id, MenuItemEntity menuitem, IngredientEntity ingredient,
+    public RecipeIngredient(Long id, MenuItem menuitem, Ingredient ingredient,
             Double quantityRequired) {
         this.id = id;
         this.menuitem = menuitem;
         this.ingredient = ingredient;
         this.quantityRequired = quantityRequired;
     }
-    public RecipeIngredientEntity() {
+    public RecipeIngredient() {
     }
     public Long getId() {
         return id;
@@ -28,16 +30,16 @@ public class RecipeIngredientEntity {
     public void setId(Long id) {
         this.id = id;
     }
-    public MenuItemEntity getMenuitem() {
+    public MenuItem getMenuitem() {
         return menuitem;
     }
-    public void setMenuitem(MenuItemEntity menuitem) {
+    public void setMenuitem(MenuItem menuitem) {
         this.menuitem = menuitem;
     }
-    public IngredientEntity getIngredient() {
+    public Ingredient getIngredient() {
         return ingredient;
     }
-    public void setIngredient(IngredientEntity ingredient) {
+    public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
     }
     public Double getQuantityRequired() {

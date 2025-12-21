@@ -1,30 +1,36 @@
 package com.example.demo.entity;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
 @Entity
-public class ProfitCalculationRecordEntity {
+public class ProfitCalculationRecord {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY,optional=false)
-    private MenuItemEntity menuItem;
-    private float totalCost;
-    private float totalMargin;
+    @JoinColumn(name = "menu_item_id", nullable = false)
+    private MenuItem menuItem;
+    private BigDecimal totalCost;
+    private BigDecimal totalMargin;
     private LocalDateTime calculatedAt;
-    public ProfitCalculationRecordEntity() {
+    @PrePersist
+    protected void onUpdate(){
+        this.calculatedAt=LocalDateTime.now();
     }
-    public ProfitCalculationRecordEntity(Long id, MenuItemEntity menuItem, float totalCost, float totalMargin,
-            LocalDateTime calculatedAt) {
+    public ProfitCalculationRecord() {
+    }
+    public ProfitCalculationRecord(Long id, MenuItem menuItem, BigDecimal totalCost, BigDecimal totalMargin
+           ) {
         this.id = id;
         this.menuItem = menuItem;
         this.totalCost = totalCost;
         this.totalMargin = totalMargin;
-        this.calculatedAt = calculatedAt;
+        
     }
     public Long getId() {
         return id;
@@ -32,30 +38,28 @@ public class ProfitCalculationRecordEntity {
     public void setId(Long id) {
         this.id = id;
     }
-    public MenuItemEntity getMenuItem() {
+    public MenuItem getMenuItem() {
         return menuItem;
     }
-    public void setMenuItem(MenuItemEntity menuItem) {
+    public void setMenuItem(MenuItem menuItem) {
         this.menuItem = menuItem;
     }
-    public float getTotalCost() {
+    public BigDecimal getTotalCost() {
         return totalCost;
     }
-    public void setTotalCost(float totalCost) {
+    public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
     }
-    public float getTotalMargin() {
+    public BigDecimal getTotalMargin() {
         return totalMargin;
     }
-    public void setTotalMargin(float totalMargin) {
+    public void setTotalMargin(BigDecimal totalMargin) {
         this.totalMargin = totalMargin;
     }
     public LocalDateTime getCalculatedAt() {
         return calculatedAt;
     }
-    public void setCalculatedAt(LocalDateTime calculatedAt) {
-        this.calculatedAt = calculatedAt;
-    }
+    
 
 
 
