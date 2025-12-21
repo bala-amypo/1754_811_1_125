@@ -13,7 +13,7 @@ import com.example.demo.entity.ProfitCalculationRecord;
 @Repository
 public interface ProfitCalculationRecordRepository extends JpaRepository<ProfitCalculationRecord,Long> {
 
-    List<ProfitCalculationRecord> findByMenuitemId(Long id);
+    List<ProfitCalculationRecord> findByMenuItemId(Long id);
     
     
    
