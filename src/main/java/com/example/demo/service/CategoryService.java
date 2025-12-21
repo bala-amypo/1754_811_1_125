@@ -7,13 +7,13 @@ import java.util.List;
 
 
 
-import com.example.demo.entity.CategoryEntity;
+import com.example.demo.entity.Category;
 
 public interface CategoryService {
-     public CategoryEntity createCategory( CategoryEntity category);
-     public CategoryEntity updateCategory( Long id, CategoryEntity category);
-     public CategoryEntity getCategoryById( Long id);
-     public List<CategoryEntity> getAllCategories();
-     public CategoryEntity deActiveCategory(Long id);
+     public Category createCategory( Category category);
+     public Category updateCategory( Long id, Category category);
+     public Category getCategoryById( Long id);
+     public List<Category> getAllCategories();
+     public Category deActiveCategory(Long id);
     
 }

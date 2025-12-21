@@ -4,13 +4,13 @@ import java.util.List;
 
 
 
-import com.example.demo.entity.IngredientEntity;
+import com.example.demo.entity.Ingredient;
 
 public interface IngredientService {
-    public IngredientEntity createIngredient(IngredientEntity std);
-    public IngredientEntity updateIngredient( Long id, IngredientEntity std);
-    public IngredientEntity getIngredientById( Long id);
-    public List<IngredientEntity> getAllIngredient( );
-    public IngredientEntity deActivateEntity(Long id);
+    public Ingredient createIngredient(Ingredient std);
+    public Ingredient updateIngredient( Long id, Ingredient std);
+    public Ingredient getIngredientById( Long id);
+    public List<Ingredient> getAllIngredient( );
+    public Ingredient deActivateIngredient(Long id);
     
 }
