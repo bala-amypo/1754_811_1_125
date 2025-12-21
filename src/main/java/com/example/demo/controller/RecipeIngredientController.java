@@ -1,57 +1,51 @@
-package com.example.demo.entity;
-
-import jakarta.persistence.*;
-
-@Entity
-public class RecipeIngredient {
+package com.example.demo.controller;
 
 
+import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    private MenuItem menuitem;
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    private Ingredient ingredient;
-    private Double quantityRequired;
-    public RecipeIngredient(Long id, MenuItem menuitem, Ingredient ingredient,
-            Double quantityRequired) {
-        this.id = id;
-        this.menuitem = menuitem;
-        this.ingredient = ingredient;
-        this.quantityRequired = quantityRequired;
-    }
-    public RecipeIngredient() {
-    }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public MenuItem getMenuitem() {
-        return menuitem;
-    }
-    public void setMenuitem(MenuItem menuitem) {
-        this.menuitem = menuitem;
-    }
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
-    public void setIngredient(Ingredient ingredient) {
-        this.ingredient = ingredient;
-    }
-    public Double getQuantityRequired() {
-        return quantityRequired;
-    }
-    public void setQuantityRequired(Double quantityRequired) {
-        this.quantityRequired = quantityRequired;
-    }
+import com.example.demo.entity.RecipeIngredient;
+import com.example.demo.service.RecipeIngredientService;
 
+@RestController
+public class RecipeIngredientController {
 
-    
+    @Autowired
+    RecipeIngredientService ser;
+    @PostMapping("/addIngredientToRecipe")
+    public RecipeIngredient addIngredientToRecipe (@PathVariable Long menuitemid,@PathVariable Long ingredientid ,@RequestParam  Double Quantity){
+        return ser.addIngredientToRecipe(menuitemid,ingredientid,Quantity);
+    }
+     @PutMapping("/{id}")
+    public RecipeIngredient updateRecipeIngredient(
+            @PathVariable Long id,
+            @RequestParam Double quantity) {
 
+        return ser.updateRecipeIngredient(id, quantity);
+    }
+    @GetMapping("/menuItem/{menuItemId}")
+    public List<RecipeIngredient> getIngredientsByMenuItem(
+            @PathVariable Long menuItemId) {
+
+        return ser.getIngredientsByMenuItem(menuItemId);
+    }
+     @DeleteMapping("/{id}")
+    public void removeIngredientFromRecipe(@PathVariable Long id) {
+        ser.removeIngredientFromRecipe(id);
+    }
+     @GetMapping("/ingredient/{ingredientId}/total-quantity")
+    public Double getTotalQuantityOfIngredient(
+            @PathVariable Long ingredientId) {
+
+        return ser.getTotalQuantityOfIngredient(ingredientId);
+    }
 
 
     

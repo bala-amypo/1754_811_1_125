@@ -1,66 +1,42 @@
-package com.example.demo.entity;
+package com.example.demo.controller;
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.entity.ProfitCalculationRecord;
+import com.example.demo.service.ProfitCalculationRecordService;
+import org.springframework.web.bind.annotation.GetMapping;
 
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
+@RestController
+public class ProfitCalculationRecordController {
 
-@Entity
-public class ProfitCalculationRecord {
+    @Autowired
+    ProfitCalculationRecordService ser;
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    @ManyToOne(fetch = FetchType.LAZY,optional=false)
-    @JoinColumn(name = "menu_item_id", nullable = false)
-    private MenuItem menuItem;
-    private BigDecimal totalCost;
-    private BigDecimal totalMargin;
-    private LocalDateTime calculatedAt;
-    @PrePersist
-    protected void onUpdate(){
-        this.calculatedAt=LocalDateTime.now();
+    @PostMapping("/calculateProfit/{id}")
+    public ProfitCalculationRecord calculateProfit(@PathVariable Long id){
+        return ser.calculateProfit(id);
     }
-    public ProfitCalculationRecord() {
+    @GetMapping("getCalculationById/{id}")
+    public ProfitCalculationRecord getCalculationById(@PathVariable Long id){
+        return ser.getCalculationById(id);
+
     }
-    public ProfitCalculationRecord(Long id, MenuItem menuItem, BigDecimal totalCost, BigDecimal totalMargin
-           ) {
-        this.id = id;
-        this.menuItem = menuItem;
-        this.totalCost = totalCost;
-        this.totalMargin = totalMargin;
-        
+
+    @GetMapping("getCalculationForMenuItem/{id}")
+    public List<ProfitCalculationRecord> getCalculationForMenuItem(@PathVariable Long id){
+        return ser.getCalculationForMenuItem(id);
     }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public MenuItem getMenuItem() {
-        return menuItem;
-    }
-    public void setMenuItem(MenuItem menuItem) {
-        this.menuItem = menuItem;
-    }
-    public BigDecimal getTotalCost() {
-        return totalCost;
-    }
-    public void setTotalCost(BigDecimal totalCost) {
-        this.totalCost = totalCost;
-    }
-    public BigDecimal getTotalMargin() {
-        return totalMargin;
-    }
-    public void setTotalMargin(BigDecimal totalMargin) {
-        this.totalMargin = totalMargin;
-    }
-    public LocalDateTime getCalculatedAt() {
-        return calculatedAt;
+
+    @GetMapping("getAllCalculation")
+    public List<ProfitCalculationRecord> getAllCalculation (){
+        return ser.getAllCalculation();
     }
     
-
-
-
+    
 }

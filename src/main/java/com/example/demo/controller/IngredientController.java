@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.IngredientEntity;
+import com.example.demo.entity.Ingredient;
 import com.example.demo.service.IngredientService;
 
 
@@ -19,26 +19,26 @@ public class IngredientController {
     @Autowired
     IngredientService ser;
     @PostMapping("/createIngredient")
-    public IngredientEntity createIngredient (@RequestBody IngredientEntity std){
+    public Ingredient createIngredient (@RequestBody Ingredient std){
         return ser.createIngredient(std);
     }
 
     @PutMapping("/updateIngredient/{id}")
-    public IngredientEntity updateIngredient(@PathVariable Long  id,@RequestBody IngredientEntity std){
+    public Ingredient updateIngredient(@PathVariable Long  id,@RequestBody Ingredient std){
         return ser.updateIngredient(id,std);
 
     }
     @GetMapping("/getIngredientById/{id}")
-    public IngredientEntity getIngredientById(@PathVariable Long id){
+    public Ingredient getIngredientById(@PathVariable Long id){
         return ser.getIngredientById(id);
     }
     @GetMapping("/getAllIngredient")
-    public List<IngredientEntity> getAllIngredient(){
+    public List<Ingredient> getAllIngredient(){
         return ser.getAllIngredient();
     }
     @PutMapping("/deActivateIngredient")
-    public IngredientEntity deActivateEntity(@PathVariable Long id){
-        return ser.deActivateEntity(id);
+    public Ingredient deActivateIngredient(@PathVariable Long id){
+        return ser.deActivateIngredient(id);
     }
 
     
