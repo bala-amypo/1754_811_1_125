@@ -4,13 +4,13 @@ import java.util.*;
 
 
 
-import com.example.demo.entity.MenuItemEntity;
+import com.example.demo.entity.MenuItem;
 
 public interface MenuItemService {
-    public MenuItemEntity createMenuItem( MenuItemEntity item);
-    public MenuItemEntity updateMenuItem( Long id,MenuItemEntity ingredient);
-    public MenuItemEntity getMenuItemById(Long id);
-    public List<MenuItemEntity> getAllMenuItem();
-    public MenuItemEntity deActivateIngredient(Long id);
+    public MenuItem createMenuItem( MenuItem item);
+    public MenuItem updateMenuItem( Long id,MenuItem ingredient);
+    public MenuItem getMenuItemById(Long id);
+    public List<MenuItem> getAllMenuItem();
+    public MenuItem deActivateIngredient(Long id);
     
 }
