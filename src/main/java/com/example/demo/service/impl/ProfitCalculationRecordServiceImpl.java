@@ -66,7 +66,7 @@ public class ProfitCalculationRecordServiceImpl implements ProfitCalculationReco
     }
     public List<ProfitCalculationRecord> getCalculationForMenuItem(Long id){
 
-      List<ProfitCalculationRecord> record=repo.findByReferenceId(id);
+      List<ProfitCalculationRecord> record=repo.findByMenuitemId(id);
       if(record.isEmpty()){
          throw new ResourceNotFoundException("no history found");
 
