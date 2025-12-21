@@ -1,12 +1,13 @@
 package com.example.demo.service.impl;
 import com.example.demo.exception.ResourceNotFoundException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.IngredientEntity;
+import com.example.demo.entity.Ingredient;
 import com.example.demo.repository.IngredientRepository;
 import com.example.demo.service.IngredientService;
 
@@ -15,29 +16,29 @@ import com.example.demo.service.IngredientService;
 public class IngredientServiceImpl implements IngredientService {
     @Autowired
     IngredientRepository repo;
-    public IngredientEntity createIngredient(IngredientEntity ingredient){
+    public Ingredient createIngredient(Ingredient ingredient){
         return repo.save(ingredient);
     }
-    public IngredientEntity updateIngredient( Long id,IngredientEntity ingredient){
-        IngredientEntity  newval=repo.findById(id).orElseThrow(()->new ResourceNotFoundException("no id is found"));
+    public Ingredient updateIngredient( Long id,Ingredient ingredient){
+        Ingredient  newval=repo.findById(id).orElseThrow(()->new ResourceNotFoundException("no id is found"));
         newval.setName(ingredient.getName());
         newval.setActive(ingredient.isActive());
         newval.setCostPerUnit(ingredient.getCostPerUnit());
         newval.setUnit(ingredient.getUnit());
-        newval.setUpdatedAt(ingredient.getUpdatedAt());
+        
         return repo.save(newval);
        
 
     }
-     public IngredientEntity getIngredientById( Long id){
+     public Ingredient getIngredientById( Long id){
         return repo.findById(id).orElseThrow(()->new ResourceNotFoundException("the id is not found "));
      }
-     public List<IngredientEntity> getAllIngredient(){
+     public List<Ingredient> getAllIngredient(){
         return repo.findAll();
      }
 
-     public IngredientEntity deActivateEntity(Long id){
-        IngredientEntity change=repo.findById(id).orElseThrow(()->new ResourceNotFoundException("the id is not found "));
+     public Ingredient deActivateIngredient(Long id){
+        Ingredient change=repo.findById(id).orElseThrow(()->new ResourceNotFoundException("the id is not found "));
         if(change.isActive()){
             change.setActive(false);
 
