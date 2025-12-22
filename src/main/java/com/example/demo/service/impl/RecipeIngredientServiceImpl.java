@@ -115,6 +115,12 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
             throw new ResourceNotFoundException(
                     "Ingredient not used in any recipe");
         }
+        double total = 0;
+        for (RecipeIngredient ingredient : list) {
+         total += ingredient.getQuantityRequired();
+        }
+        return total;
+
 
        
     }
