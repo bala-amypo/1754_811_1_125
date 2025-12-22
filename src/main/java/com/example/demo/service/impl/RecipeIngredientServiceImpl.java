@@ -50,7 +50,7 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
                         new ResourceNotFoundException("Ingredient not found"));
 
         RecipeIngredient recipeIngredient = new RecipeIngredient();
-        recipeIngredient.setMenuitem(menuitem); // 🔴 KEEP menuitem
+        recipeIngredient.setMenuitem(menuitem); 
         recipeIngredient.setIngredient(ingredient);
         recipeIngredient.setQuantityRequired(quantity);
 
@@ -116,8 +116,6 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
                     "Ingredient not used in any recipe");
         }
 
-        return list.stream()
-                .mapToDouble(RecipeIngredient::getQuantityRequired)
-                .sum();
+       
     }
 }
