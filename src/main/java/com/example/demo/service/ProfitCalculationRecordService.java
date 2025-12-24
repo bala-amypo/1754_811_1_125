@@ -1,20 +1,16 @@
 package com.example.demo.service;
 
-
-
-
+import com.example.demo.entity.ProfitCalculationRecord;
 
 import java.util.List;
 
-import com.example.demo.entity.ProfitCalculationRecord;
+public interface ProfitCalculationService {
 
-public interface ProfitCalculationRecordService {
-    public ProfitCalculationRecord calculateProfit( Long id);
-   
-    public ProfitCalculationRecord getCalculationById(Long id);
+    ProfitCalculationRecord calculateProfit(Long menuItemId);
 
-    public List<ProfitCalculationRecord> getCalculationForMenuItem(Long id);
+    ProfitCalculationRecord getCalculationById(Long id);
 
-    public List<ProfitCalculationRecord> getAllCalculation();
-    
+    List<ProfitCalculationRecord> getCalculationsForMenuItem(Long menuItemId);
+
+    List<ProfitCalculationRecord> getAllCalculations();
 }
