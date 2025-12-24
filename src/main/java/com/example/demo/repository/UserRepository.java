@@ -1,13 +1,13 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.Ingredient;
+import com.example.demo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<Ingredient> findByNameIgnoreCase(String name);
+    Optional<User> findByEmailIgnoreCase(String email);
 }

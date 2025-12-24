@@ -1,66 +1,76 @@
 package com.example.demo.entity;
 
-
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
-
 @Entity
+@Table(name = "profit_calculation_records")
 public class ProfitCalculationRecord {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY,optional=false)
-    @JoinColumn(name = "menu_item_id", nullable = false)
-    private MenuItem menuItem;
+
     private BigDecimal totalCost;
-    private BigDecimal totalMargin;
-    private LocalDateTime calculatedAt;
-    @PrePersist
-    protected void onUpdate(){
-        this.calculatedAt=LocalDateTime.now();
-    }
-    public ProfitCalculationRecord() {
-    }
-    public ProfitCalculationRecord(Long id, MenuItem menuItem, BigDecimal totalCost, BigDecimal totalMargin
-           ) {
-        this.id = id;
-        this.menuItem = menuItem;
-        this.totalCost = totalCost;
-        this.totalMargin = totalMargin;
-        
-    }
+
+    private BigDecimal sellingPrice;
+
+    private Double profitMargin;
+
+    private LocalDateTime calculatedAt = LocalDateTime.now();
+
+    @ManyToOne
+    @JoinColumn(name = "menu_item_id")
+    private MenuItem menuItem;
+
+    // ===== Getters & Setters =====
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
-    public MenuItem getMenuItem() {
-        return menuItem;
-    }
-    public void setMenuItem(MenuItem menuItem) {
-        this.menuItem = menuItem;
-    }
+
     public BigDecimal getTotalCost() {
         return totalCost;
     }
+
     public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
     }
-    public BigDecimal getTotalMargin() {
-        return totalMargin;
+
+    public BigDecimal getSellingPrice() {
+        return sellingPrice;
     }
-    public void setTotalMargin(BigDecimal totalMargin) {
-        this.totalMargin = totalMargin;
+
+    public void setSellingPrice(BigDecimal sellingPrice) {
+        this.sellingPrice = sellingPrice;
     }
+
+    public Double getProfitMargin() {
+        return profitMargin;
+    }
+
+    public void setProfitMargin(Double profitMargin) {
+        this.profitMargin = profitMargin;
+    }
+
     public LocalDateTime getCalculatedAt() {
         return calculatedAt;
     }
-    
 
+    public void setCalculatedAt(LocalDateTime calculatedAt) {
+        this.calculatedAt = calculatedAt;
+    }
 
+    public MenuItem getMenuItem() {
+        return menuItem;
+    }
 
+    public void setMenuItem(MenuItem menuItem) {
+        this.menuItem = menuItem;
+    }
 }
