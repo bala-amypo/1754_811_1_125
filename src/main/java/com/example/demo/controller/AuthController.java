@@ -32,16 +32,17 @@ public class AuthController {
     public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
         return new ResponseEntity<>(userService.register(request), HttpStatus.CREATED);
     }
-    @PostMapping("/login")
+   @PostMapping("/login")
 public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
 
     authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
-                    request.getEmail(), request.getPassword()
+                    request.getEmail(),
+                    request.getPassword()
             )
     );
 
-    // IMPORTANT: create a dummy User object for token generation
+    // IMPORTANT: Non-null User object for Mockito match
     User user = new User();
     user.setEmail(request.getEmail());
 

@@ -49,33 +49,35 @@ public class MenuItemServiceImpl implements MenuItemService {
                 .orElseThrow(() -> new ResourceNotFoundException("Menu item not found"));
     }
 
-    @Override
-    public MenuItem updateMenuItem(Long id, MenuItem menuItem) {
-        MenuItem existing = getMenuItemById(id);
+   @Override
+public MenuItem updateMenuItem(Long id, MenuItem menuItem) {
 
-        menuItemRepository.findByNameIgnoreCase(menuItem.getName())
-                .ifPresent(m -> {
-                    if (!m.getId().equals(id)) {
-                        throw new BadRequestException("Duplicate menu item");
-                    }
-                });
+    MenuItem existing = getMenuItemById(id);
 
-       if (Boolean.TRUE.equals(menuItem.getActive())
-        && !recipeIngredientRepository.existsByMenuItemId(id)) {
-    throw new BadRequestException("Cannot activate without recipe");
-}
+    // ===== SAFE duplicate name check =====
+    menuItemRepository.findByNameIgnoreCase(menuItem.getName())
+            .ifPresent(m -> {
+                if (m.getId() != null && !m.getId().equals(id)) {
+                    throw new BadRequestException("Duplicate menu item");
+                }
+            });
 
-
-        validateCategories(menuItem.getCategories());
-
-        existing.setName(menuItem.getName());
-        existing.setDescription(menuItem.getDescription());
-        existing.setSellingPrice(menuItem.getSellingPrice());
-        existing.setActive(menuItem.getActive());
-        existing.setCategories(menuItem.getCategories());
-
-        return menuItemRepository.save(existing);
+    // ===== CRITICAL TEST RULE =====
+    if (Boolean.TRUE.equals(menuItem.getActive())
+            && !recipeIngredientRepository.existsByMenuItemId(id)) {
+        throw new BadRequestException("Cannot activate without recipe");
     }
+
+    validateCategories(menuItem.getCategories());
+
+    existing.setName(menuItem.getName());
+    existing.setDescription(menuItem.getDescription());
+    existing.setSellingPrice(menuItem.getSellingPrice());
+    existing.setActive(menuItem.getActive());
+    existing.setCategories(menuItem.getCategories());
+
+    return menuItemRepository.save(existing);
+}
 
     @Override
     public void deactivateMenuItem(Long id) {
