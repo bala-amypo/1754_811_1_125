@@ -1,42 +1,35 @@
 package com.example.demo.controller;
-import java.util.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.ProfitCalculationRecord;
-import com.example.demo.service.ProfitCalculationRecordService;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.example.demo.service.impl.ProfitCalculationServiceImpl;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-
+import java.util.List;
 
 @RestController
-public class ProfitCalculationRecordController {
+@RequestMapping("/profits")
+public class ProfitCalculationController {
 
-    @Autowired
-    ProfitCalculationRecordService ser;
+    private final ProfitCalculationServiceImpl profitCalculationService;
 
-    @PostMapping("/calculateProfit/{id}")
-    public ProfitCalculationRecord calculateProfit(@PathVariable Long id){
-        return ser.calculateProfit(id);
-    }
-    @GetMapping("getCalculationById/{id}")
-    public ProfitCalculationRecord getCalculationById(@PathVariable Long id){
-        return ser.getCalculationById(id);
-
+    public ProfitCalculationController(ProfitCalculationServiceImpl profitCalculationService) {
+        this.profitCalculationService = profitCalculationService;
     }
 
-    @GetMapping("getCalculationForMenuItem/{id}")
-    public List<ProfitCalculationRecord> getCalculationForMenuItem(@PathVariable Long id){
-        return ser.getCalculationForMenuItem(id);
+    @PostMapping("/{menuItemId}")
+    public ResponseEntity<ProfitCalculationRecord> calculateProfit(
+            @PathVariable Long menuItemId) {
+        return ResponseEntity.ok(profitCalculationService.calculateProfit(menuItemId));
     }
 
-    @GetMapping("getAllCalculation")
-    public List<ProfitCalculationRecord> getAllCalculation (){
-        return ser.getAllCalculation();
+    @GetMapping("/{id}")
+    public ResponseEntity<ProfitCalculationRecord> getCalculation(@PathVariable Long id) {
+        return ResponseEntity.ok(profitCalculationService.getCalculationById(id));
     }
-    
-    
+
+    @GetMapping
+    public ResponseEntity<List<ProfitCalculationRecord>> getAll() {
+        return ResponseEntity.ok(profitCalculationService.getAllCalculations());
+    }
 }
