@@ -21,16 +21,24 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    public User register(RegisterRequest request) {
-        User user = new User();
-        user.setEmail(request.getEmail());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(request.getRole());
-        user.setActive(true);
+   @Override
+public User register(RegisterRequest request) {
 
-        return userRepository.save(user);
-    }
+    // ✅ Duplicate email check (CRITICAL FOR TEST)
+    userRepository.findByEmailIgnoreCase(request.getEmail())
+            .ifPresent(u -> {
+                throw new BadRequestException("Email already exists");
+            });
+
+    User user = new User();
+    user.setEmail(request.getEmail());
+    user.setPassword(passwordEncoder.encode(request.getPassword()));
+    user.setRole(request.getRole());
+    user.setActive(true);
+
+    return userRepository.save(user);
+}
+
 
     // ✅ ADD THIS METHOD
     @Override
