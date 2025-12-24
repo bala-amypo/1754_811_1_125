@@ -6,4 +6,7 @@ import com.example.demo.entity.User;
 public interface UserService {
 
     User register(RegisterRequest request);
+
+    // ✅ ADD THIS
+    User findByEmail(String email);
 }
