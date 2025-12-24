@@ -32,7 +32,7 @@ public class AuthController {
     public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
         return new ResponseEntity<>(userService.register(request), HttpStatus.CREATED);
     }
-   @PostMapping("/login")
+  @PostMapping("/login")
 public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
 
     authenticationManager.authenticate(
@@ -42,14 +42,15 @@ public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
             )
     );
 
-    // IMPORTANT: Non-null User object for Mockito match
-    User user = new User();
-    user.setEmail(request.getEmail());
+    // 🔑 THIS LINE IS THE ENTIRE FIX
+    User user = userRepository.findByEmailIgnoreCase(request.getEmail())
+            .orElseThrow(() -> new RuntimeException("User not found"));
 
     String token = jwtTokenProvider.generateToken(request.getEmail(), user);
 
     return ResponseEntity.ok(new AuthResponse(token));
 }
+
 
 
    
