@@ -41,10 +41,11 @@ public class IngredientServiceImpl implements IngredientService {
 
         ingredientRepository.findByNameIgnoreCase(ingredient.getName())
                 .ifPresent(i -> {
-                    if (!i.getId().equals(id)) {
-                        throw new BadRequestException("Duplicate ingredient");
-                    }
-                });
+    if (i.getId() != null && !i.getId().equals(id)) {
+        throw new BadRequestException("Duplicate ingredient");
+    }
+});
+
 
         existing.setName(ingredient.getName());
         existing.setUnit(ingredient.getUnit());

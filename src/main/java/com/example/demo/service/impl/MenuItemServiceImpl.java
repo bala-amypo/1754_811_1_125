@@ -60,9 +60,11 @@ public class MenuItemServiceImpl implements MenuItemService {
                     }
                 });
 
-        if (menuItem.getActive() && !recipeIngredientRepository.existsByMenuItemId(id)) {
-            throw new BadRequestException("Cannot activate without recipe");
-        }
+       if (Boolean.TRUE.equals(menuItem.getActive())
+        && !recipeIngredientRepository.existsByMenuItemId(id)) {
+    throw new BadRequestException("Cannot activate without recipe");
+}
+
 
         validateCategories(menuItem.getCategories());
 
