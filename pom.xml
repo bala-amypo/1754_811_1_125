@@ -10,97 +10,56 @@
     <groupId>com.example</groupId>
     <artifactId>menu-profitability</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
 
-    <name>Menu Profitability</name>
-    <description>Spring Boot Menu Profitability Application</description>
-
-    <!-- ============================= -->
-    <!-- Parent -->
-    <!-- ============================= -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.0</version>
-        <relativePath/>
     </parent>
 
-    <!-- ============================= -->
-    <!-- Properties -->
-    <!-- ============================= -->
     <properties>
         <java.version>17</java.version>
     </properties>
 
-    <!-- ============================= -->
-    <!-- Dependencies -->
-    <!-- ============================= -->
     <dependencies>
 
-        <!-- Spring Core -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
-        <!-- Spring Web / REST -->
+        <!-- Core -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Spring Data JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- ============================= -->
-        <!-- SQL DATABASE (MySQL) -->
-        <!-- ============================= -->
+        <!-- MySQL -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- ============================= -->
-        <!-- Swagger / OpenAPI -->
-        <!-- ============================= -->
+        <!-- Swagger -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.3.0</version>
         </dependency>
 
-        <!-- ============================= -->
-        <!-- Testing -->
-        <!-- ============================= -->
+        <!-- ===================== -->
+        <!-- TESTING (TestNG ONLY) -->
+        <!-- ===================== -->
 
-        <!-- Spring Boot Test (without JUnit) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.junit.jupiter</groupId>
-                    <artifactId>junit-jupiter</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.junit.vintage</groupId>
-                    <artifactId>junit-vintage-engine</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+        <!-- REMOVE spring-boot-starter-test COMPLETELY -->
+        <!-- This is the key fix -->
 
-        <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -108,7 +67,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -116,11 +74,15 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-testng</artifactId>
+            <version>0.5.0</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
-    <!-- ============================= -->
-    <!-- Build -->
-    <!-- ============================= -->
     <build>
         <plugins>
 
@@ -130,21 +92,18 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Surefire (TestNG runner) -->
-                        <plugin>
+            <!-- FORCE TESTNG -->
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
                     <useModulePath>false</useModulePath>
-                    <providers>
-                        <provider>
-                            <name>testng</name>
-                        </provider>
-                    </providers>
+                    <includes>
+                        <include>**/*Tests.java</include>
+                    </includes>
                 </configuration>
             </plugin>
-
 
         </plugins>
     </build>
