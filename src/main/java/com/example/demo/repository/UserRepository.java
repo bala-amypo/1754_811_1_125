@@ -7,14 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-/*public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmailIgnoreCase(String email);
-}/
-public AuthController(AuthenticationManager authenticationManager,
-                      JwtTokenProvider jwtTokenProvider,
-                      UserRepository userRepository) {
-    this.authenticationManager = authenticationManager;
-    this.jwtTokenProvider = jwtTokenProvider;
-    this.userRepository = userRepository;
+
 }
