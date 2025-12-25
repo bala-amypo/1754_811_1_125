@@ -34,8 +34,7 @@ public class MenuItem {
     )
     private Set<Category> categories = new HashSet<>();
 
-    // ===== Getters & Setters =====
-
+  
     public Long getId() {
         return id;
     }
