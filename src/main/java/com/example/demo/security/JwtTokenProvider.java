@@ -12,8 +12,7 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-    // ✅ Hardcoded secret to avoid test failures
-    // (tests should not depend on env variables)
+   
     private static final SecretKey SECRET_KEY =
             Keys.hmacShaKeyFor("my-super-secret-key-my-super-secret-key".getBytes());
 
