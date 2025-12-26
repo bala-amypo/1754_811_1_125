@@ -28,14 +28,14 @@ public class AuthController {
         this.userService = userService;
     }
 
-    // ================= REGISTER =================
+ 
    @PostMapping("/register")
 public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
     User user = userService.register(request);
     return ResponseEntity.status(201).body(user);
 }
 
-    // ================= LOGIN =================
+
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
 
@@ -46,7 +46,7 @@ public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
                 )
         );
 
-        // 🔑 TEST EXPECTS USER FROM SERVICE
+        
         User user = userService.findByEmail(request.getEmail());
 
         String token = jwtTokenProvider.generateToken(request.getEmail(), user);
