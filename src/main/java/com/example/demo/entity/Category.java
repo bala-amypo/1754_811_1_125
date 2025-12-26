@@ -23,7 +23,7 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private Set<MenuItem> menuItems = new HashSet<>();
 
-    // ===== Getters & Setters =====
+    
 
     public Long getId() {
         return id;

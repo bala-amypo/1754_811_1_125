@@ -20,7 +20,7 @@ public class RecipeIngredient {
     @JoinColumn(name = "menu_item_id")
     private MenuItem menuItem;
 
-    // ===== Getters & Setters =====
+    
 
     public Long getId() {
         return id;

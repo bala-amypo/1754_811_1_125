@@ -13,7 +13,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalRequestException{
 
-    // Resource not found
+    
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleResourceNotFound(
             ResourceNotFoundException ex) {
@@ -26,7 +26,7 @@ public class GlobalRequestException{
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
-    // Bad request
+   
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<Map<String, Object>> handleBadRequest(
             BadRequestException ex) {
@@ -39,7 +39,7 @@ public class GlobalRequestException{
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
-    // Validation errors (@Valid)
+    
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidationErrors(
             MethodArgumentNotValidException ex) {
@@ -57,7 +57,7 @@ public class GlobalRequestException{
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 
-    // All other errors
+   
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleGlobalException(
             Exception ex) {
