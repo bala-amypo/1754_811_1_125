@@ -13,20 +13,21 @@ import java.util.Date;
 public class JwtTokenProvider {
 
    
-    private static final SecretKey SECRET_KEY =
-            Keys.hmacShaKeyFor("my-super-secret-key-my-super-secret-key".getBytes());
+       private static final SecretKey SECRET_KEY =
+                   Keys.hmacShaKeyFor("my-super-secret-key-my-super-secret-key".getBytes());
 
-    private static final long EXPIRATION_MS = 1000 * 60 * 60; // 1 hour
+                       private static final long EXPIRATION_MS = 1000 * 60 * 60; // 1 hour
 
-    public String generateToken(String email, User user) {
+                           public String generateToken(String email, User user) {
 
-        return Jwts.builder()
-                .setSubject(email)
-                .claim("role", user.getRole())
-                .claim("userId", user.getId())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
-                .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
-                .compact();
-    }
-}
+                                   return Jwts.builder()
+                                                   .setSubject(email)
+                                                                   .claim("role", user.getRole())
+                                                                                   .claim("userId", user.getId())
+                                                                                                   .setIssuedAt(new Date())
+                                                                                                                   .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MS))
+                                                                                                                                   .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
+                                                                                                                                                   .compact();
+                                                                                                                                                       }
+                                                                                                                                                       }
+                                                                                                                                                       
