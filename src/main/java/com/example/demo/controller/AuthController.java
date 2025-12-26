@@ -7,6 +7,7 @@ import com.example.demo.entity.User;
 import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.UserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,24 +17,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
-    private final JwtTokenProvider jwtTokenProvider;
-    private final UserService userService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-    public AuthController(AuthenticationManager authenticationManager,
-                          JwtTokenProvider jwtTokenProvider,
-                          UserService userService) {
-        this.authenticationManager = authenticationManager;
-        this.jwtTokenProvider = jwtTokenProvider;
-        this.userService = userService;
-    }
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private UserService userService;
 
     // ================= REGISTER =================
-   @PostMapping("/register")
-public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
-    User user = userService.register(request);
-    return ResponseEntity.status(201).body(user);
-}
+    @PostMapping("/register")
+    public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
+        User user = userService.register(request);
+        return ResponseEntity.status(201).body(user);
+    }
 
     // ================= LOGIN =================
     @PostMapping("/login")
@@ -46,7 +44,6 @@ public ResponseEntity<User> register(@RequestBody RegisterRequest request) {
                 )
         );
 
-        // 🔑 TEST EXPECTS USER FROM SERVICE
         User user = userService.findByEmail(request.getEmail());
 
         String token = jwtTokenProvider.generateToken(request.getEmail(), user);
