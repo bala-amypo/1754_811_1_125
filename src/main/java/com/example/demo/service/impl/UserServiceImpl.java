@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
    @Override
 public User register(RegisterRequest request) {
 
-    // ✅ Duplicate email check (CRITICAL FOR TEST)
+   
     userRepository.findByEmailIgnoreCase(request.getEmail())
             .ifPresent(u -> {
                 throw new BadRequestException("Email already exists");
@@ -42,7 +42,7 @@ public User register(RegisterRequest request) {
 }
 
 
-    // ✅ ADD THIS METHOD
+    
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmailIgnoreCase(email)
