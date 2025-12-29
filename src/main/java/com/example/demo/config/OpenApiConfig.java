@@ -16,21 +16,27 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI customOpenAPI() {
 
+        // Define Bearer JWT security scheme
         SecurityScheme bearerAuth = new SecurityScheme()
+                .name("Authorization")
                 .type(SecurityScheme.Type.HTTP)
                 .scheme("bearer")
                 .bearerFormat("JWT");
 
         return new OpenAPI()
+                // Server URL
                 .servers(List.of(
-                        new Server().url("https://9316.pro604cr.amypo.ai/")
+                        new Server().url("https://9316.pro604cr.amypo.ai")
                 ))
-                .components(
-                        new Components()
-                                .addSecuritySchemes("bearerAuth", bearerAuth)
+
+                // Register security scheme
+                .components(new Components()
+                        .addSecuritySchemes("bearerAuth", bearerAuth)
                 )
-                .addSecurityItem(
-                        new SecurityRequirement().addList("bearerAuth")
+
+                // Apply security globally (this enables the Authorize button)
+                .addSecurityItem(new SecurityRequirement()
+                        .addList("bearerAuth")
                 );
     }
 }
